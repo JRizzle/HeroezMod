@@ -27,7 +27,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTabletDecoder extends BlockContainer {
 
-    private Icon decoderTextures[] = new Icon[5];
+    private Icon decoderTextures[] = new Icon[7];
     private static boolean keepInventory = false;
     private Random tabletDecoderRand;
 
@@ -60,9 +60,10 @@ public class BlockTabletDecoder extends BlockContainer {
 	decoderTextures[1] = iconRegister.registerIcon("heroez:decoderTop");
 	decoderTextures[2] = iconRegister.registerIcon("heroez:decoderSides");
 	decoderTextures[3] = iconRegister.registerIcon("heroez:decoderFront");
-	decoderTextures[4] = iconRegister
+	decoderTextures[4] = iconRegister.registerIcon("heroez:decoderSides");
+	decoderTextures[5] = iconRegister.registerIcon("heroez:decoderSides");
+	decoderTextures[6] = iconRegister
 		.registerIcon("heroez:decoderFrontActive");
-
     }
 
     // /**
@@ -85,7 +86,7 @@ public class BlockTabletDecoder extends BlockContainer {
 	    return decoderTextures[1]; // top
 	default:
 	    if (side == front) {
-		return ((TileEntityTabletDecoder) te).isActive() ? decoderTextures[4]
+		return ((TileEntityTabletDecoder) te).isActive() ? decoderTextures[6]
 			: decoderTextures[3];
 
 	    } else {
@@ -96,15 +97,7 @@ public class BlockTabletDecoder extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public Icon getBlockTextureFromSideAndMetadata(int side, int metadata) {
-	if (side == 0) {
-	    return decoderTextures[0]; // bottom
-	} else if (side == 1) {
-	    return decoderTextures[1]; // top
-	} else if (side != metadata) {
-	    return decoderTextures[2]; // sides
-	} else {
-	    return decoderTextures[3]; // front
-	}
+	return decoderTextures[side];
     }
 
     /**
@@ -209,5 +202,4 @@ public class BlockTabletDecoder extends BlockContainer {
 	}
 	super.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
-
 }
