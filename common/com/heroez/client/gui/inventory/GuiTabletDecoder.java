@@ -23,21 +23,24 @@ public class GuiTabletDecoder extends GuiContainer {
      * Draw the foreground layer for the GuiContainer (everything in front of
      * the items)
      */
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 	fontRenderer.drawString(
 		StatCollector.translateToLocal("container.inventory"), 8,
-		(ySize - 96) + 2, 0xffffff);
+		(ySize - 96) + 2, 4210752);
     }
 
     /**
      * Draw the background layer for the GuiContainer (everything behind the
      * items)
      */
+    @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2,
 	    int par3) {
-	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
 	mc.renderEngine
 		.bindTexture("/mods/heroez/textures/gui/tabletDecoder.png");
+	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	int j = (width - xSize) / 2;
 	int k = (height - ySize) / 2;
 	drawTexturedModalRect(j, k, 0, 0, xSize, ySize);

@@ -1,7 +1,5 @@
 package com.heroez.container;
 
-import java.util.Iterator;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,6 +9,9 @@ import net.minecraft.item.ItemStack;
 
 import com.heroez.recipes.RecipesTabletDecoder;
 import com.heroez.tileentity.TileEntityTabletDecoder;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerTabletDecoder extends Container {
     private TileEntityTabletDecoder tabletDecoder;
@@ -44,21 +45,24 @@ public class ContainerTabletDecoder extends Container {
     /**
      * Updates crafting matrix; called from onCraftMatrixChanged. Args: none
      */
+    @Override
     public void detectAndSendChanges() {
 	super.detectAndSendChanges();
-	Iterator<?> var1 = this.crafters.iterator();
-	while (var1.hasNext()) {
-	    ICrafting var2 = (ICrafting) var1.next();
+	for (int i = 0; i < this.crafters.size(); ++i) {
+	    ICrafting icrafting = (ICrafting) this.crafters.get(i);
+
 	    if (this.lastTabletDecoderCookTime != this.tabletDecoder.tabletCookTime) {
-		var2.sendProgressBarUpdate(this, 0,
+		icrafting.sendProgressBarUpdate(this, 0,
 			this.tabletDecoder.tabletCookTime);
 	    }
+
 	    if (this.lastTabletDecoderBurnTime != this.tabletDecoder.tabletBurnTime) {
-		var2.sendProgressBarUpdate(this, 1,
+		icrafting.sendProgressBarUpdate(this, 1,
 			this.tabletDecoder.tabletBurnTime);
 	    }
+
 	    if (this.lastTabletDecoderItemBurnTime != this.tabletDecoder.tabletItemBurnTime) {
-		var2.sendProgressBarUpdate(this, 2,
+		icrafting.sendProgressBarUpdate(this, 2,
 			this.tabletDecoder.tabletItemBurnTime);
 	    }
 	}
@@ -67,6 +71,8 @@ public class ContainerTabletDecoder extends Container {
 	this.lastTabletDecoderItemBurnTime = this.tabletDecoder.tabletItemBurnTime;
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
     public void updateProgressBar(int par1, int par2) {
 	if (par1 == 0) {
 	    tabletDecoder.tabletCookTime = par2;
@@ -81,6 +87,7 @@ public class ContainerTabletDecoder extends Container {
 	}
     }
 
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
 	return tabletDecoder.isUseableByPlayer(par1EntityPlayer);
     }

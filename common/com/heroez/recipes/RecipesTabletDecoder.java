@@ -6,14 +6,14 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
+import com.heroez.Heroez;
+
 public class RecipesTabletDecoder {
     private static final RecipesTabletDecoder tabletDecoderBase = new RecipesTabletDecoder();
 
     /** The list of decoding results. */
-    @SuppressWarnings("rawtypes")
-    private Map decoderList = new HashMap();
-    @SuppressWarnings("rawtypes")
-    private Map decoderExperience = new HashMap();
+    private Map<Integer, ItemStack> decoderList = new HashMap<Integer, ItemStack>();
+    private Map<Integer, Float> decoderExperience = new HashMap<Integer, Float>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
@@ -23,14 +23,13 @@ public class RecipesTabletDecoder {
     }
 
     private RecipesTabletDecoder() {
-	addSmelting(Block.dirt.blockID, new ItemStack(Block.cobblestone, 1, 0),
-		0.7F);
+	addSmelting(Heroez.itemTablet.itemID, new ItemStack(Block.cobblestone,
+		1, 0), 0.7F);
     }
 
     /**
      * Adds a smelting recipe.
      */
-    @SuppressWarnings("unchecked")
     public void addSmelting(int id, ItemStack itemStack, float experience) {
 	decoderList.put(Integer.valueOf(id), itemStack);
 	this.decoderExperience.put(Integer.valueOf(itemStack.itemID),
@@ -44,8 +43,7 @@ public class RecipesTabletDecoder {
 	return (ItemStack) decoderList.get(Integer.valueOf(id));
     }
 
-    @SuppressWarnings("rawtypes")
-    public Map getSmeltingList() {
+    public Map<Integer, ItemStack> getSmeltingList() {
 	return decoderList;
     }
 
