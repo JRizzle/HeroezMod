@@ -38,8 +38,8 @@ public class WorldGeneratorHeroez implements IWorldGenerator {
 	    int yCoord = random.nextInt(32);
 	    int zCoord = chunkZ + random.nextInt(16);
 	    // 15 Max items in a vein
-	    (new WorldGenMinable(Heroez.tabletOre.blockID, 6)).generate(world,
-		    random, xCoord, yCoord, zCoord);
+	    (new WorldGenMinable(Heroez.blockTabletOre.blockID, 6)).generate(
+		    world, random, xCoord, yCoord, zCoord);
 	}
     }
 

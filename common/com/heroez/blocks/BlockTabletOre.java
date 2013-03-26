@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
 
 import com.heroez.Heroez;
 import com.heroez.lib.BlockIds;
@@ -32,6 +34,14 @@ public class BlockTabletOre extends BlockOre {
     }
 
     public int quantityDropped(Random rand) {
-	return rand.nextInt(3);
+	return 1;
+    }
+
+    public void dropBlockAsItemWithChance(World world, int xCoord, int yCoord,
+	    int zCoord, int par5, float par6, int par7) {
+	super.dropBlockAsItemWithChance(world, xCoord, yCoord, zCoord, par5,
+		par6, par7);
+	int xp = MathHelper.getRandomIntegerInRange(world.rand, 6, 10);
+	this.dropXpOnBlockBreak(world, xCoord, yCoord, zCoord, xp);
     }
 }

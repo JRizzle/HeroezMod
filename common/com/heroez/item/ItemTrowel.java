@@ -7,7 +7,7 @@ import net.minecraft.item.ItemTool;
 import com.heroez.Heroez;
 
 public class ItemTrowel extends ItemTool {
-    public static final Block[] blocksEffectiveAgainst = new Block[] { Heroez.tabletOre };
+    public static final Block[] blocksEffectiveAgainst = new Block[] { Heroez.blockTabletOre };
     public float efficiencyOnProperMaterial = 10.0F;
 
     public ItemTrowel(int itemId, EnumToolMaterial enumToolMaterial) {
